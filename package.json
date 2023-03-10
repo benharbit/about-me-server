@@ -18,6 +18,6 @@
 	},
   "scripts": {
     "start": "node index.js",
-    "build": "tsc"
+    "build": "npx tsc"
   }
 }
