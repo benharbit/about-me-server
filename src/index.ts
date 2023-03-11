@@ -3,11 +3,16 @@ import  google   from 'googleapis';
 import express  from  "express" ;
 import fs from 'fs';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
-const clientInfo = JSON.parse(fs.readFileSync('../.client_secret.json', 'utf-8'));
 const app = express();
 app.use(cors())
 const port = 2999;
+
+app.get( "/", ( req: any, res: any ) => {
+  res.send( "Why ask why?" );
+
+});
 
 app.post( "/getToken", async ( req: any, res: any ) => {
   console.log("getToken")
@@ -20,10 +25,9 @@ app.post( "/getToken", async ( req: any, res: any ) => {
   }
   const code = req.headers.code;
   const oaut2Client = new google.Auth.OAuth2Client(
-  clientInfo.web.client_id,
-  clientInfo.web.client_secret,
-  "https://www.saidiacapital.com/callback"
-  );
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.CALLBACK_URL  );
   let token: any = "";
   try {
     let result: any = await oaut2Client.getToken((code))
