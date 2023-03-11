@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 const app = express();
 app.use(cors())
-const port = 2999;
+const port = process.env.PORT || 2999;
 
 app.get( "/", ( req: any, res: any ) => {
   res.send( "Why ask why?" );
